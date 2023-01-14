@@ -1,0 +1,53 @@
+﻿@model ExpenseTracker.WEB.Models.Expense
+
+@{
+    ViewBag.Title = "Edit Expense";
+}
+
+<p class="text-danger text-center">@ViewBag.Message</p>
+
+<div class="card card-outline card-primary">
+    <div class="card-header">
+        <div class="w-100 d-flex align-items-center">
+            <h3 class="flex-grow-1">Edit Expense</h3>
+            <div>
+                <a href="/Expense/Expense" class="btn btn-primary">Back to list</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <div class="col-12">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>Title</label>
+                    @Html.TextBoxFor(x => x.title, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Category</label>
+                    @Html.DropDownListFor(x => x.category, new SelectList(ViewBag.categories, "id", "name"), "--Select--", new { @class = "form-control select2 select2-danger" })
+                </div>
+                <!-- /.form-group -->
+            </div>
+            <div class="col-12">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>Description</label>
+                    @Html.TextBoxFor(x => x.description, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-12">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>Amount</label>
+                    @Html.TextBoxFor(x => x.amount, new { @class = "form-control" })
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Update</button>
+        </form>
+    </div>
+
+</div>
+

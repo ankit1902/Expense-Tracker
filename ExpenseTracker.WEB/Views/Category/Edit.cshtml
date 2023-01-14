@@ -1,0 +1,37 @@
+﻿@model ExpenseTracker.WEB.Models.Category
+
+@{
+    ViewBag.Title = "Edit Category";
+}
+
+<div class="card card-outline card-primary">
+    <div class="card-header">
+        <div class="w-100 d-flex align-items-center">
+            <h3 class="flex-grow-1">Edit Category</h3>
+            <div>
+                <a href="/Category/Category" class="btn btn-primary">Back to list</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <div class="col-12">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>Name</label>
+                    @Html.TextBoxFor(x => x.name, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-12">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>Expense Limit</label>
+                    @Html.TextBoxFor(x => x.expense_limit, new { @class = "form-control" })
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Update</button>
+        </form>
+    </div>
+
+</div>
+

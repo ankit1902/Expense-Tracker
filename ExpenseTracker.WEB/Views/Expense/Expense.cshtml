@@ -1,0 +1,126 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model ExpenseTracker.WEB.Models.Expense
+
+<div style="text-align: center; font-size: 25px;">
+    <label><strong>Expense</strong></label>
+</div>
+
+<div class="row">
+    <div class="col-md-2 m-3">
+        <button type="button" class="btn btn-block bg-gradient-primary" data-toggle="modal" data-target="#modal-default">Add Expense</button>
+    </div>
+    @*<div class="col-md-2 m-3">
+            <button type="button" class="btn btn-block bg-gradient-primary" id="expreport" onclick="location.href='@Url.Action("TotalExpense", "Expense")'">
+                Expense Report
+            </button>
+        </div>*@
+</div>
+<div>
+    <div class="card">
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Category</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 1;
+                        foreach (var expense in ViewBag.expenseList)
+                        {
+                            var category = "";
+                            foreach (var item in ViewBag.categories)
+                            {
+                                if (item.id == expense.category)
+                                {
+                                    category = item.name;
+                                }
+                            }
+                            <tr>
+                                <td>@i</td>
+                                <td>@expense.title</td>
+                                <td>@expense.description</td>
+                                <td>@expense.amount</td>
+                                <td>@category</td>
+                                <td class="d-flex justify-content-center align-items-center">
+                                    <a href="Edit/@expense.id" class="btn mx-2 btn-warning">Edit</a>
+                                    <a href="Delete/@expense.id" class="btn mx-2 btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+</div>
+
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <form method="post" class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Expense</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12">
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Title</label>
+                        @Html.TextBoxFor(x => x.title, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label>Category</label>
+                        @Html.DropDownListFor(x => x.category, new SelectList(ViewBag.categories, "id", "name"), "--Select--", new { @class = "form-control select2 select2-danger" })
+                    </div>
+                    <!-- /.form-group -->
+                </div>
+                <div class="col-12">
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Description</label>
+                        @Html.TextBoxFor(x => x.description, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-12">
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Amount</label>
+                        @Html.TextBoxFor(x => x.amount, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </form>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#example1').DataTable({
+            "autoWidth": true,
+            "responsive": true,
+        });
+    })
+</script>

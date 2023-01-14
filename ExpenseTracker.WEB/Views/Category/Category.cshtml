@@ -1,0 +1,100 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model ExpenseTracker.WEB.Models.Category
+
+<div style="text-align: center; font-size: 25px;">
+    <label><strong>Category</strong></label>
+</div>
+
+<div class="row">
+    <div class="col-md-2 m-4">
+        <button type="button" class="btn btn-block bg-gradient-primary" data-toggle="modal" data-target="#modal-default">Add Category</button>
+    </div>
+</div>
+<div>
+    <div class="card">
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Expense Limit</th>
+                        <th class="w-25">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 1;
+                        foreach (var category in ViewBag.categories)
+                        {
+                            <tr>
+                                <td>@i</td>
+                                <td>@category.name</td>
+                                <td>@category.expense_limit</td>
+                                <td class="d-flex justify-content-center align-items-center">
+                                    <a href="Edit/@category.id" class="btn mx-2 btn-warning">Edit</a>
+                                    <a href="Delete/@category.id" class="btn mx-2 btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+</div>
+
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <form method="post" class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Category and Expense Limit</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12">
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Category name</label>
+                        @Html.TextBoxFor(x => x.name, new { @class = "form-control" })
+                    </div>
+                </div>
+                <!-- /.form-group -->
+
+                <div class="col-12">
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Expense Limit</label>
+                        @Html.TextBoxFor(x => x.expense_limit, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </form>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+
+<script>
+    $(document).ready(function () {
+        $('#example1').DataTable({
+            "autoWidth": true,
+            "responsive": true,
+        });
+    })
+</script>
+
+

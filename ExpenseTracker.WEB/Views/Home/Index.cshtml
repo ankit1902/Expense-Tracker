@@ -1,0 +1,112 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div class="row d-flex mx-1 justify-content-between">
+        <div class="col-lg-3 col-6">
+            <!-- small card -->
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>@ViewBag.totalLimit</h3>
+                    <p>Total Limit</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="@Url.Action("", "")" class="small-box-footer">
+                    More info <i class="fas fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+            <!-- small card -->
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>@ViewBag.expenseSpent</h3>
+                    <p>Expense Spent</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <a href="@Url.Action("Expense", "Expense")" class="small-box-footer">
+                    More info <i class="fas fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+            <!-- small card -->
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>@ViewBag.totalCategories</h3>
+                    <p>Number of Category</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-money-check"></i>
+                </div>
+                <a href="@Url.Action("Category", "Category")" class="small-box-footer">
+                    More info <i class="fas fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="m-2">
+        <div class="card">
+            <!-- /.card-header -->
+            <div class="card-header">
+                <div class="card-title">
+                    <label>Expense list</label>
+                </div>
+            </div>
+            <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Category</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int i = 1;
+                            foreach (var expense in ViewBag.expenseList)
+                            {
+                                var category = "";
+                                foreach (var item in ViewBag.categories)
+                                {
+                                    if (item.id == expense.category)
+                                    {
+                                        category = item.name;
+                                    }
+                                }
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@expense.title</td>
+                                    <td>@expense.description</td>
+                                    <td>@expense.amount</td>
+                                    <td>@category</td>
+                                </tr>
+                                i++;
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#example1').DataTable({
+            "autoWidth": true,
+            "responsive": true,
+        });
+    })
+</script>

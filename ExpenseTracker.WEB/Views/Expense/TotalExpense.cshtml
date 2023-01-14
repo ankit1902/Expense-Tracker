@@ -1,0 +1,124 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div class="card">
+        <div class="card-header">
+
+            <h3 class="card-title">Total Expense</h3>
+
+        </div>
+        <div class="form-group col-md-2">
+            <label>From to to date:</label>
+
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="far fa-calendar-alt"></i>
+                    </span>
+                </div>
+                <input type="text" class="form-control float-right" id="reservation">
+            </div>
+            <!-- /.input group -->
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Rendering engine</th>
+                        <th>Browser</th>
+                        <th>Platform(s)</th>
+                        <th>Engine version</th>
+                        <th>CSS grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Trident</td>
+                        <td>
+                            Internet
+                            Explorer 4.0
+                        </td>
+                        <td>Win 95+</td>
+                        <td> 4</td>
+                        <td>X</td>
+                    </tr>
+                    <tr>
+                        <td>Trident</td>
+                        <td>
+                            Internet
+                            Explorer 5.0
+                        </td>
+                        <td>Win 95+</td>
+                        <td>5</td>
+                        <td>C</td>
+                    </tr>
+                    <tr>
+                        <td>Trident</td>
+                        <td>
+                            Internet
+                            Explorer 5.5
+                        </td>
+                        <td>Win 95+</td>
+                        <td>5.5</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td>Trident</td>
+                        <td>
+                            Internet
+                            Explorer 6
+                        </td>
+                        <td>Win 98+</td>
+                        <td>6</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td>Trident</td>
+                        <td>Internet Explorer 7</td>
+                        <td>Win XP SP2+</td>
+                        <td>7</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td>Trident</td>
+                        <td>AOL browser (AOL desktop)</td>
+                        <td>Win XP</td>
+                        <td>6</td>
+                        <td>A</td>
+                    </tr>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+    //Date range picker
+    $('#reservation').daterangepicker()
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+            format: 'MM/DD/YYYY hh:mm A'
+        }
+    })
+</script>
